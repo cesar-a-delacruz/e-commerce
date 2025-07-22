@@ -1,5 +1,6 @@
 import { config } from "./config";
-import { getToken } from "./localstorage";
+// import { getToken } from "./localstorage";
+import { getUser } from "./localstorage";
 
 const getRequest = async (path) => {
   // console.log(getToken())
@@ -7,7 +8,8 @@ const getRequest = async (path) => {
     const params = {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + getToken(),
+        // Authorization: "Bearer " + getToken(),
+        Authorization: "Bearer " + getUser(),
       },
     };
     const res = await fetch(config.baseURL + path, params);
@@ -26,7 +28,8 @@ const postRequest = async (path, body) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getToken(),
+        // Authorization: "Bearer " + getToken(),
+        Authorization: "Bearer " + getUser(),
       },
       body: JSON.stringify(body),
     };
@@ -48,7 +51,8 @@ const DeleteRequest = async (path) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getToken(),
+        // Authorization: "Bearer " + getToken(),
+        Authorization: "Bearer " + getUser(),
       },
     };
 
@@ -67,7 +71,8 @@ const putRequest = async (path, body) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getToken(),
+        // Authorization: "Bearer " + getToken(),
+        Authorization: "Bearer " + getUser(),
       },
       body: JSON.stringify(body),
     };

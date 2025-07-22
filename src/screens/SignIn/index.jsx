@@ -1,12 +1,13 @@
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {Api} from '../../utils/Api'
-import {setToken} from '../../utils/localstorage'
+// import {setToken} from '../../utils/localstorage'
+import {setUser} from '../../utils/localstorage'
 import './signIn.css'
 function Index() {
   const {replace, push} = useHistory()
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   const _handleSubmit = useCallback(async () => {
@@ -15,7 +16,6 @@ function Index() {
       setLoading(true)
       const {statusCode, data} = await Api.postRequest('/api/user/signin', {
         email,
-
         password,
       })
       setLoading(false)
@@ -24,8 +24,9 @@ function Index() {
         alert(data)
         return
       }
-      const {token} = JSON.parse(data)
-      setToken(token)
+      // const {token} = JSON.parse(data)
+      // setToken(token)
+      setUser(data)
       replace('/')
     }
   }, [email, password, replace])
@@ -45,24 +46,24 @@ function Index() {
             }}
           >
             <div style={{cursor: 'pointer'}} onClick={() => push('/')}>
-              <i class="fas fa-arrow-circle-left fa-5x"></i>
+              <i className="fas fa-arrow-circle-left fa-5x"></i>
             </div>
             <p>Sign In</p>
           </div>
 
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
-            id="lname"
+            id="email"
             name="email"
             placeholder="Your email.."
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            id="lname"
+            id="password"
             name="password"
             placeholder="Your Password.."
             value={password}
