@@ -15,10 +15,10 @@ const ProductScreen = ({match, history}) => {
   const {loading, error, product} = productDetails
 
   useEffect(() => {
-    if (product && match.params.id !== product._id) {
+    if (product && match.params.id !== product.id) {
       dispatch(getProductDetails(match.params.id))
     }
-  }, [dispatch, match, product])
+  }, [])
 
   const addToCartHandler = () => {
     if (user.userInfo.isLogin) {
@@ -40,7 +40,7 @@ const ProductScreen = ({match, history}) => {
         <>
           <div className="productscreen__left">
             <div className="left__image">
-              <img src={product.imageUrl} alt={product.name} />
+              <img src={product.image} alt={product.name} />
             </div>
             <div className="left__info">
               <p className="left__name">{product.name}</p>
@@ -57,13 +57,13 @@ const ProductScreen = ({match, history}) => {
               <p>
                 Status:
                 <span>
-                  {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                  {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
                 </span>
               </p>
               <p>
                 Qty
                 <select value={qty} onChange={e => setQty(e.target.value)}>
-                  {[...Array(product.countInStock).keys()].map(x => (
+                  {[...Array(product.stock).keys()].map(x => (
                     <option key={x + 1} value={x + 1}>
                       {x + 1}
                     </option>
