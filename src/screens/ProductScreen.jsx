@@ -1,8 +1,6 @@
 import './ProductScreen.css'
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-
-// Actions
 import {getProductDetails} from '../redux/actions/productActions'
 import {addToCart} from '../redux/actions/cartActions'
 
@@ -22,7 +20,7 @@ const ProductScreen = ({match, history}) => {
 
   const addToCartHandler = () => {
     if (user.userInfo.isLogin) {
-      dispatch(addToCart(user.userInfo.details.id, product.id, count))
+      dispatch(addToCart(product.id, count))
       history.push(`/cart`)
       return
     } else {

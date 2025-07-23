@@ -15,15 +15,14 @@ import SignUp from './screens/SignUp'
 import SignIn from './screens/SignIn'
 import {useDispatch} from 'react-redux'
 import {fetchCart} from './redux/actions/cartActions'
-import {setUserDeatils} from './redux/actions/userAction'
+import {setUserDetails} from './redux/actions/userAction'
 
 function App() {
   const [sideToggle, setSideToggle] = useState(false)
-  // fetchCart
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchCart())
-    dispatch(setUserDeatils())
+    dispatch(setUserDetails())
   }, [dispatch])
 
   return (

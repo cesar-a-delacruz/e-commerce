@@ -4,10 +4,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useMemo} from 'react'
 import {logout} from '../utils/localstorage'
 import {setInitialState} from '../redux/actions/userAction'
+import {clearState} from '../redux/actions/cartActions'
 
 const Navbar = ({click}) => {
   const cart = useSelector(state => state.cart)
-  const history = useHistory()
+  const { replace, push} = useHistory()
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
@@ -19,8 +20,9 @@ const Navbar = ({click}) => {
 
   const _handleLogout = () => {
     dispatch(setInitialState())
+    dispatch(clearState())
+    replace('/')
     logout()
-    history.push('/')
   }
 
   return (

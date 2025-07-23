@@ -17,22 +17,22 @@ const CartScreen = () => {
   const { loginInfo } = useLogin();
 
   const { cartItems } = cart;
-
-  const qtyChangeHandler = (id, qty) => {
-    dispatch(addToCart(id, qty));
+  
+  const countHandler = (id, count) => {
+    dispatch(addToCart(id, count));
   };
 
   const removeFromCartHandler = (item) => {
-    dispatch(removeFromCart({ pId: item.product, _id: item._id }));
+    dispatch(removeFromCart({ pId: item.product, id: item.id }));
   };
 
   const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+    return cartItems.reduce((count, item) => Number(item.count) + count, 0);
   };
 
   const getCartSubTotal = () => {
     return cartItems
-      .reduce((price, item) => price + item.price * item.qty, 0)
+      .reduce((price, item) => price + item.price * item.count, 0)
       .toFixed(2);
   };
 
@@ -57,7 +57,7 @@ const CartScreen = () => {
                 <CartItem
                   key={item.product}
                   item={item}
-                  qtyChangeHandler={qtyChangeHandler}
+                  countHandler={countHandler}
                   removeHandler={() => removeFromCartHandler(item)}
                 />
               ))

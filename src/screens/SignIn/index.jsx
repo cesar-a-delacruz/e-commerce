@@ -1,17 +1,18 @@
 import {useCallback, useState} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {Api} from '../../utils/Api'
-// import {setToken} from '../../utils/localstorage'
 import {setUser} from '../../utils/localstorage'
+import {useDispatch} from 'react-redux'
 import './signIn.css'
+import { fetchCart } from '../../redux/actions/cartActions'
 function Index() {
+  const dispatch = useDispatch()
   const {replace, push} = useHistory()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   const _handleSubmit = useCallback(async () => {
-    // callback
     if (email.length > 2 && password.length > 2) {
       setLoading(true)
       const {statusCode, data} = await Api.postRequest('/api/user/signin', {
@@ -24,9 +25,8 @@ function Index() {
         alert(data)
         return
       }
-      // const {token} = JSON.parse(data)
-      // setToken(token)
       setUser(data)
+      dispatch(fetchCart())
       replace('/')
     }
   }, [email, password, replace])

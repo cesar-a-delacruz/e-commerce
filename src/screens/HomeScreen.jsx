@@ -1,13 +1,8 @@
 import './HomeScreen.css'
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-
-// Components
 import Product from '../components/Product'
-
-//Actions
 import {getProducts as listProducts} from '../redux/actions/productActions'
-import {setUserDeatils} from '../redux/actions/userAction'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -17,10 +12,6 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(listProducts())
-  }, [dispatch])
-
-  useEffect(() => {
-    dispatch(setUserDeatils())
   }, [dispatch])
 
   return (
