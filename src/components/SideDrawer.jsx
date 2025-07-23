@@ -15,14 +15,13 @@ const SideDrawer = ({show, click}) => {
   const {cartItems} = cart
 
   const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0)
+    return cartItems.reduce((count, item) => Number(item.count) + count, 0)
   }
 
   if (show) {
     sideDrawerClass.push('show')
   }
   const _handleLogout = () => {
-    // console.log('click')
     dispatch(setInitialState())
     logout()
     history.push('/')

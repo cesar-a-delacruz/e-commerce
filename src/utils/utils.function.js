@@ -1,13 +1,13 @@
 export const convertToCartData = carts => {
   return carts.map(c => {
     return {
-      product: c.productId._id,
+      product: c.productId.id,
       name: c.productId.name,
-      imageUrl: c.productId.imageUrl,
+      image: c.productId.image,
       price: c.productId.price,
-      countInStock: c.productId.countInStock,
-      qty: c.count,
-      _id: c._id,
+      stock: c.productId.stock,
+      count: c.count,
+      id: c.id,
     }
   })
 }

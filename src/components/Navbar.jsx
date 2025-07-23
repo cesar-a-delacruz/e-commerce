@@ -10,16 +10,14 @@ const Navbar = ({click}) => {
   const history = useHistory()
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  // console.log({user})
 
   const {cartItems} = cart
 
   const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0)
+    return cartItems.reduce((count, item) => Number(item.count) + count, 0)
   }
 
   const _handleLogout = () => {
-    // console.log('click')
     dispatch(setInitialState())
     logout()
     history.push('/')

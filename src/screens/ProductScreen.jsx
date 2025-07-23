@@ -7,7 +7,7 @@ import {getProductDetails} from '../redux/actions/productActions'
 import {addToCart} from '../redux/actions/cartActions'
 
 const ProductScreen = ({match, history}) => {
-  const [qty, setQty] = useState(1)
+  const [count, setCount] = useState(1)
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ const ProductScreen = ({match, history}) => {
 
   const addToCartHandler = () => {
     if (user.userInfo.isLogin) {
-      dispatch(addToCart(product._id, qty))
+      dispatch(addToCart(user.userInfo.details.id, product.id, count))
       history.push(`/cart`)
       return
     } else {
@@ -62,7 +62,7 @@ const ProductScreen = ({match, history}) => {
               </p>
               <p>
                 Qty
-                <select value={qty} onChange={e => setQty(e.target.value)}>
+                <select value={count} onChange={e => setCount(e.target.value)}>
                   {[...Array(product.stock).keys()].map(x => (
                     <option key={x + 1} value={x + 1}>
                       {x + 1}
