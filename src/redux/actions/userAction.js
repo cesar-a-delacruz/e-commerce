@@ -6,9 +6,6 @@ export const setUserDetails = () => async dispatch => {
 
   const user = getUser()
   if (!user) {
-    dispatch({
-      type: actionTypes.SET_INITIAL_STATE,
-    })
     return
   }
   dispatch({
@@ -23,5 +20,9 @@ export const setUserDetails = () => async dispatch => {
 export const setInitialState = () => async dispatch => {
   dispatch({
     type: actionTypes.SET_INITIAL_STATE,
+    payload: {
+      isLogin: false,
+      details: {},
+    },
   })
 }

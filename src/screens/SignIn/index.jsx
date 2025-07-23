@@ -5,6 +5,7 @@ import {setUser} from '../../utils/localstorage'
 import {useDispatch} from 'react-redux'
 import './signIn.css'
 import { fetchCart } from '../../redux/actions/cartActions'
+import { setUserDetails } from '../../redux/actions/userAction'
 function Index() {
   const dispatch = useDispatch()
   const {replace, push} = useHistory()
@@ -27,6 +28,7 @@ function Index() {
       }
       setUser(data)
       dispatch(fetchCart())
+      dispatch(setUserDetails())
       replace('/')
     }
   }, [email, password, replace])

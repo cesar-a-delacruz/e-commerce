@@ -3,7 +3,7 @@ import {Link, useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {useMemo} from 'react'
 import {logout} from '../utils/localstorage'
-import {setInitialState} from '../redux/actions/userAction'
+import { setInitialState, setUserDetails} from '../redux/actions/userAction'
 import {clearState} from '../redux/actions/cartActions'
 
 const Navbar = ({click}) => {
@@ -19,10 +19,10 @@ const Navbar = ({click}) => {
   }
 
   const _handleLogout = () => {
-    dispatch(setInitialState())
-    dispatch(clearState())
-    replace('/')
     logout()
+    dispatch(clearState())
+    dispatch(setInitialState())
+    replace('/')
   }
 
   return (

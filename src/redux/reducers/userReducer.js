@@ -11,7 +11,7 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
     case actionTypes.SET_USER:
       return {userInfo: {...action.payload}}
     case actionTypes.SET_INITIAL_STATE:
-      return USER_INITIAL_STATE
+      return {userInfo: {...action.payload}}
 
     default:
       return state
