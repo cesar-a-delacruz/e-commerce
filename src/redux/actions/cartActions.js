@@ -22,6 +22,7 @@ export const addToCart = ( product_id, count) => async dispatch => {
   Api.postRequest('/api/cart', {user_id: getUser().id, product_id, count})
 }
 export const countEdit = ( id, count) => async dispatch => {
+  console.log(id, count)
   dispatch({
     type: actionTypes.ADD_TO_CART,
     payload: { id,count,},
@@ -31,13 +32,13 @@ export const countEdit = ( id, count) => async dispatch => {
 }
 
 export const removeFromCart =
-  ({pId, _id}) =>
+  (id) =>
   dispatch => {
     dispatch({
       type: actionTypes.REMOVE_FROM_CART,
-      payload: pId,
+      payload: id,
     })
-    Api.DeleteRequest('/api/cart/' + _id)
+    Api.DeleteRequest('/api/cart/' + id)
   }
 
 export const fetchCart = () => async dispatch => {

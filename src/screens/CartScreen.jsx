@@ -23,8 +23,9 @@ const CartScreen = () => {
     dispatch(fetchCart());
   };
 
-  const removeFromCartHandler = (item) => {
-    dispatch(removeFromCart({ pId: item.product, id: item.id }));
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+    dispatch(fetchCart());
   };
 
   const getCartCount = () => {
@@ -59,7 +60,7 @@ const CartScreen = () => {
                   key={item.product}
                   item={item}
                   countHandler={countHandler}
-                  removeHandler={() => removeFromCartHandler(item)}
+                  removeHandler={removeFromCartHandler}
                 />
               ))
             )}
