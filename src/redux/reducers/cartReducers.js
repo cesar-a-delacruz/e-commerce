@@ -9,14 +9,18 @@ export const cartReducer = (state = CART_INITIAL_STATE, action) => {
     case actionTypes.ADD_TO_CART:
       const item = action.payload
 
-      const existItem = state.cartItems.find(x => x.product === item.product)
+      const existItem = state.cartItems.find(x => x.id === item.id)
 
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map(x =>
-            x.product === existItem.product ? item : x,
-          ),
+          cartItems: state.cartItems.map(x => {
+
+            if (x.id === existItem.id) {
+              x.count = existItem.count
+              return x
+            } else return x
+          }),
         }
       } else {
         return {

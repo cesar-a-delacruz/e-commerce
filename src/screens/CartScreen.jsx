@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 
 // Actions
-import { addToCart, removeFromCart } from "../redux/actions/cartActions";
+import { countEdit, fetchCart, removeFromCart } from "../redux/actions/cartActions";
 import useLogin from "../utils/hooks/useLogin";
 
 const CartScreen = () => {
@@ -19,7 +19,8 @@ const CartScreen = () => {
   const { cartItems } = cart;
   
   const countHandler = (id, count) => {
-    dispatch(addToCart(id, count));
+    dispatch(countEdit(id, count));
+    dispatch(fetchCart());
   };
 
   const removeFromCartHandler = (item) => {

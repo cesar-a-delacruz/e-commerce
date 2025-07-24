@@ -13,7 +13,7 @@ const CartItem = ({ item, countHandler, removeHandler }) => {
       <p className="cartitem__price">${item.price}</p>
       <select
         value={item.count}
-        onChange={(e) => countHandler(item.product, e.target.value)}
+        onChange={(e) => countHandler(item.id, e.target.value)}
         className="cartItem__select"
       >
         {[...Array(Number(item.stock)).keys()].map((x) => (

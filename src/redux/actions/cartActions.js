@@ -21,6 +21,14 @@ export const addToCart = ( product_id, count) => async dispatch => {
 
   Api.postRequest('/api/cart', {user_id: getUser().id, product_id, count})
 }
+export const countEdit = ( id, count) => async dispatch => {
+  dispatch({
+    type: actionTypes.ADD_TO_CART,
+    payload: { id,count,},
+  })
+
+  await Api.putRequest('/api/cart', {id, count})
+}
 
 export const removeFromCart =
   ({pId, _id}) =>
