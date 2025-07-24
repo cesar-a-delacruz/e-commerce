@@ -5,17 +5,17 @@ import './signup.css'
 
 function Index() {
   const {replace, push} = useHistory()
-  const [fullName, setFullName] = useState('')
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   const _handleSubmit = useCallback(async () => {
-    if (fullName.length > 2 && email.length > 2 && password.length > 2) {
+    if (name.length > 2 && email.length > 2 && password.length > 2) {
       setLoading(true)
       const {statusCode, data} = await Api.postRequest('/api/user/signup', {
         email,
-        fullName,
+        name,
         password,
       })
       if (statusCode === 400 || statusCode === 500 || statusCode === 403) {
@@ -23,10 +23,9 @@ function Index() {
         alert(data)
         return
       }
-      alert(data)
       replace('/signin')
     }
-  }, [email, fullName, password, replace])
+  }, [email, name, password, replace])
   if (loading) return <h1>Loading...</h1>
   return (
     <div className="signupscreen">
@@ -42,31 +41,31 @@ function Index() {
             }}
           >
             <div style={{cursor: 'pointer'}} onClick={() => push('/')}>
-              <i class="fas fa-arrow-circle-left fa-5x"></i>
+              <i className="fas fa-arrow-circle-left fa-5x"></i>
             </div>
             <p>Signup</p>
           </div>
 
-          <label for="fname">Full Name</label>
+          <label htmlFor="fname">Full Name</label>
           <input
             type="text"
             id="fname"
             name="firstname"
             placeholder="Your full name.."
-            value={fullName}
-            onChange={e => setFullName(e.target.value)}
+            value={name}
+            onChange={e => setName(e.target.value)}
           />
 
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
-            id="lname"
+            id="email"
             name="email"
             placeholder="Your email.."
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="lname"
