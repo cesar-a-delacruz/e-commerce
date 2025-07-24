@@ -6,7 +6,7 @@ import { getUser } from '../../utils/localstorage'
 export const addToCart = ( product_id, count) => async dispatch => {
   const {data} = await Api.getRequest(`/api/products/${product_id}`)
   const product = JSON.parse(data)
-
+  const insert_id = (await Api.postRequest('/api/cart', {user_id: getUser().id, product_id, count})).data
   dispatch({
     type: actionTypes.ADD_TO_CART,
     payload: {
@@ -15,14 +15,13 @@ export const addToCart = ( product_id, count) => async dispatch => {
       image: product.image,
       price: product.price,
       stock: product.stock,
+      id: insert_id,
       count,
     },
   })
 
-  Api.postRequest('/api/cart', {user_id: getUser().id, product_id, count})
 }
 export const countEdit = ( id, count) => async dispatch => {
-  console.log(id, count)
   dispatch({
     type: actionTypes.ADD_TO_CART,
     payload: { id,count,},
