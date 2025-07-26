@@ -1,10 +1,12 @@
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, removeProduct } from "@actions/productActions";
-import "./Admin.css";
+import "./Products.css";
 
-function Admin() {
+function Products() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const getProducts = useSelector((state) => state.products);
   const { products, loading, error } = getProducts;
 
@@ -16,11 +18,13 @@ function Admin() {
   else
     return (
       <>
-        <div className="cart-page">
+        <div className="products-page">
           <div className="content">
             <div className="header">
               <h2>Lista de productos ({getProductCount()})</h2>
-              <button>Añadir producto</button>
+              <button onClick={() => history.push("/products/new")}>
+                Añadir producto
+              </button>
             </div>
             <table>
               <thead>
@@ -48,7 +52,10 @@ function Admin() {
                       <td>{product.stock}</td>
                       <td>
                         <div className="buttons">
-                          <button className="edit">
+                          <button
+                            className="edit"
+                            onClick={() => history.push("/products/edit")}
+                          >
                             <i className="fas fa-pen"></i>
                           </button>
                           <button
@@ -81,4 +88,4 @@ function Admin() {
   }
 }
 
-export default Admin;
+export default Products;

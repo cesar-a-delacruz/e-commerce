@@ -6,12 +6,13 @@ import { fetchCart } from "@actions/cartActions";
 import { setUser } from "@actions/userActions";
 // Components
 import Navbar from "@components/Navbar";
-import Home from "@pages/Home";
-import Product from "@pages/Product";
-import Cart from "@pages/Cart";
 import SignUp from "@pages/SignUp";
 import SignIn from "@pages/SignIn";
-import Admin from "@pages/Admin";
+import Products from "@pages/Admin/Products";
+import New from "@pages/Admin/New";
+import Home from "@pages/Customer/Home";
+import Product from "@pages/Customer/Product";
+import Cart from "@pages/Customer/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/products/new" component={New} />
         </Switch>
       </main>
     </BrowserRouter>
