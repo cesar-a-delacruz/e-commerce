@@ -11,6 +11,7 @@ import Product from "@pages/Product";
 import Cart from "@pages/Cart";
 import SignUp from "@pages/SignUp";
 import SignIn from "@pages/SignIn";
+import Admin from "@pages/Admin";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/admin" component={Admin} />
         </Switch>
       </main>
     </BrowserRouter>

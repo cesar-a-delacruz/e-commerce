@@ -16,6 +16,10 @@ export const productsReducer = (state = { products: [] }, action) => {
       return {
         error: action.payload,
       };
+    case actionTypes.REMOVE:
+      return {
+        products: state.products.filter((p) => p.id !== action.payload),
+      };
 
     default:
       return state;
@@ -31,7 +35,7 @@ export const productReducer = (state = { product: {} }, action) => {
     case actionTypes.GET_ONE_SUCCESS:
       return {
         loading: false,
-        product: {...action.payload},
+        product: { ...action.payload },
       };
     case actionTypes.GET_ONE_FAIL:
       return {

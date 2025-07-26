@@ -34,3 +34,12 @@ export const fetchProduct = (id) => async (dispatch) => {
     });
   }
 };
+
+export const removeProduct = (id) => (dispatch) => {
+  dispatch({
+    type: actionTypes.REMOVE,
+    payload: id,
+  });
+
+  api.deleteRequest("/api/products/" + id);
+};
