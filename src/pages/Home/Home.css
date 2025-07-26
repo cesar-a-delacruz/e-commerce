@@ -1,0 +1,16 @@
+.home-page {
+  max-width: 1300px;
+  margin: 1rem auto;
+}
+
+.home-page .title {
+  font-size: 1.5rem;
+  color: #171717;
+  margin-bottom: 1rem;
+  margin-left: 8px;
+}
+
+.home-page .products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

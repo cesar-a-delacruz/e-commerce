@@ -1,0 +1,40 @@
+.cart-item {
+  width: 100%;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  gap: 8px;
+  background: #fff;
+  border-radius: 2px;
+  place-items: center;
+  margin-bottom: 8px;
+}
+
+.name {
+  text-decoration: none;
+  color: #171717;
+}
+
+.name:hover {
+  color: #dd219e;
+}
+
+.select {
+  padding: 10px 17px;
+}
+
+.delete {
+  padding: 10px 17px;
+  color: red;
+  background: #f4f4f4;
+  border: 1px solid #171717;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.delete:hover,
+.delete:active,
+.delete:focus {
+  background: #171717;
+  transform: scale(1.2);
+}

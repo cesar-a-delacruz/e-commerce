@@ -1,19 +1,18 @@
-import * as actionTypes from '../constants/userContants'
-export const USER_INITIAL_STATE = {
-  userInfo: {
-    isLogin: false,
-    details: {},
-  },
-}
+import * as actionTypes from "@constants/userContants";
 
-export const userReducer = (state = USER_INITIAL_STATE, action) => {
+export const INITIAL_STATE = {
+  logged: false,
+  details: {},
+};
+
+export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.SET_USER:
-      return {userInfo: {...action.payload}}
-    case actionTypes.SET_INITIAL_STATE:
-      return {userInfo: {...action.payload}}
+    case actionTypes.INITIAL:
+      return INITIAL_STATE;
+    case actionTypes.SET:
+      return { ...action.payload };
 
     default:
-      return state
+      return state;
   }
-}
+};

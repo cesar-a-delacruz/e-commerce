@@ -1,9 +1,9 @@
-const devConfig = {
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
-}
+const dev = {
+  baseURL: "http://localhost:8080",
+};
 
-const prodConfig = {
-  baseURL: 'Your production url',
-}
+const prod = {
+  baseURL: "",
+};
 
-export const config = devConfig
+export const config = dev;

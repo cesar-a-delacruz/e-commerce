@@ -1,47 +1,39 @@
-import './App.css'
-import {useEffect, useState} from 'react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-
+import { useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+// Redux
+import { useDispatch } from "react-redux";
+import { fetchCart } from "@actions/cartActions";
+import { setUser } from "@actions/userActions";
 // Components
-import Navbar from './components/Navbar'
-import SideDrawer from './components/SideDrawer'
-import Backdrop from './components/Backdrop'
-
-// Screens
-import HomeScreen from './screens/HomeScreen'
-import ProductScreen from './screens/ProductScreen'
-import CartScreen from './screens/CartScreen'
-import SignUp from './screens/SignUp'
-import SignIn from './screens/SignIn'
-import {useDispatch} from 'react-redux'
-import {fetchCart} from './redux/actions/cartActions'
-import {setUserDetails} from './redux/actions/userAction'
+import Navbar from "@components/Navbar";
+import Home from "@pages/Home";
+import Product from "@pages/Product";
+import Cart from "@pages/Cart";
+import SignUp from "@pages/SignUp";
+import SignIn from "@pages/SignIn";
 
 function App() {
-  const [sideToggle, setSideToggle] = useState(false)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(fetchCart())
-    dispatch(setUserDetails())
-  }, [dispatch])
+    dispatch(fetchCart());
+    dispatch(setUser());
+  }, []);
 
   return (
-    <Router>
-      <Navbar click={() => setSideToggle(true)} />
-      <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
-      <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
-
-      <main className="app">
+    <BrowserRouter>
+      <Navbar />
+      <main>
         <Switch>
-          <Route exact path="/" component={HomeScreen} />
-          <Route exact path="/product/:id" component={ProductScreen} />
-          <Route exact path="/cart" component={CartScreen} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/product/:id" component={Product} />
+          <Route exact path="/cart" component={Cart} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
         </Switch>
       </main>
-    </Router>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

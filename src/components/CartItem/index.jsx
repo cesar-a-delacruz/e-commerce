@@ -1,20 +1,20 @@
-import "./CartItem.css";
 import { Link } from "react-router-dom";
+import "./CartItem.css";
 
-const CartItem = ({ item, countHandler, removeHandler }) => {
+function CartItem({ item, countHandler, removeHandler }) {
   return (
-    <div className="cartitem">
-      <div className="cartitem__image">
+    <div className="cart-item">
+      <div className="image">
         <img src={item.image} alt={item.name} />
       </div>
-      <Link to={`/product/${item.product}`} className="cartItem__name">
-        <p>{item.name}</p>
+      <Link to={`/product/${item.product}`} className="name">
+        {item.name}
       </Link>
-      <p className="cartitem__price">${item.price}</p>
+      <p className="price">${item.price}</p>
       <select
         value={item.count}
         onChange={(e) => countHandler(item.id, e.target.value)}
-        className="cartItem__select"
+        className="select"
       >
         {[...Array(Number(item.stock)).keys()].map((x) => (
           <option key={x + 1} value={x + 1}>
@@ -22,14 +22,11 @@ const CartItem = ({ item, countHandler, removeHandler }) => {
           </option>
         ))}
       </select>
-      <button
-        className="cartItem__deleteBtn"
-        onClick={() => removeHandler(item.id)}
-      >
+      <button className="delete" onClick={() => removeHandler(item.id)}>
         <i className="fas fa-trash"></i>
       </button>
     </div>
   );
-};
+}
 
 export default CartItem;

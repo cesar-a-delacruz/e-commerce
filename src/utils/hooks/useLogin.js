@@ -1,28 +1,28 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {useHistory} from 'react-router'
-import {Api} from '../Api'
-import {logout, getUser} from '../localstorage'
+import { useCallback, useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import { logout, getUser } from "../localstorage";
 
 function useLogin() {
-  const [loginInfo, setLoginInfo] = useState({
+  const [info, setInfo] = useState({
     loading: true,
-    isLogin: false,
-  })
-  const {replace} = useHistory()
+    logged: false,
+  });
+  const { replace } = useHistory();
+
   const checkLogin = useCallback(async () => {
-    const user = getUser()
+    const user = getUser();
     if (!user) {
-      replace('/')
-      logout()
-      return
+      replace("/");
+      logout();
+      return;
     }
-    setLoginInfo({loading: false, isLogin: true})
-  }, [replace])
+    setInfo({ loading: false, logged: true });
+  }, [replace]);
+
   useEffect(() => {
-    checkLogin()
-  }, [checkLogin])
-  return {loginInfo}
+    checkLogin();
+  }, [checkLogin]);
+  return { info: info };
 }
 
-export default useLogin
+export default useLogin;

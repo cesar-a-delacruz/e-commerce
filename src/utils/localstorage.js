@@ -1,16 +1,14 @@
-export const setUser = user => {
-  localStorage.setItem('user', user)
+function setUser(user) {
+  localStorage.setItem("user", user);
 }
 
-export const getUser = () => {
-  let user = localStorage.getItem('user')
-  return user ? JSON.parse(user) : false
+function getUser() {
+  const user = localStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
 }
 
-export const isLogin = () => {
-  return getUser() ? true : false
+function logout() {
+  localStorage.clear();
 }
 
-export const logout = () => {
-  localStorage.clear()
-}
+export { setUser, getUser, logout };

@@ -1,5 +1,5 @@
-export const ADD_TO_CART = 'ADD_TO_CART'
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
-export const CART_RESET = 'CART_RESET'
-export const FETCH_MY_CART = 'FETCH_MY_CART'
-export const CLEAR_STATE = 'CLEAR_STATE'
+export const INITIAL = "INITIAL";
+export const FETCH = "FETCH";
+export const ADD = "ADD";
+export const ALTER_COUNT = "ALTER_COUNT";
+export const REMOVE = "REMOVE";

@@ -1,0 +1,71 @@
+.signin-page {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.signin-page .container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.signin-page .form {
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 500px;
+  height: fit-content;
+  border: 2px solid #ccc;
+}
+
+.signin-page .form .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.signin-page .form p {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.signin-page .form span {
+  font-size: 14px;
+}
+
+.signin-page .link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signin-page input:not([type="submit"]),
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+.signin-page input[type="submit"] {
+  background-color: #457b9d;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.signin-page input[type="submit"]:hover {
+  background-color: #1d3557;
+}

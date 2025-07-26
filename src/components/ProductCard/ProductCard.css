@@ -18,24 +18,23 @@
   border-radius: 8px;
 }
 
-.product__info > p {
+.product .info > p {
   margin-bottom: 8px;
 }
 
-.info__price {
-  font-weight: bold;
-}
-
-.info__name {
+.product .info .name {
   font-size: 1rem;
   overflow: hidden;
 }
 
-.info__description {
+.product .info .description {
   font-size: 0.8rem;
 }
 
-.info__button {
+.product .info .price {
+  font-weight: bold;
+}
+.product .info .button {
   display: block;
   text-decoration: none;
   text-align: center;
