@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import * as api from "@utils/api";
 import "./New.css";
 
@@ -10,6 +11,11 @@ function New() {
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
   const [image, setImage] = useState("");
+
+  const user = useSelector((state) => state.user);
+  if (user.details.type !== "admin") {
+    history.replace("/");
+  }
 
   return (
     <div className="new-product-page">
@@ -82,7 +88,11 @@ function New() {
   async function submitHandler() {
     if (name.length > 2 && description.length > 2 && price.length > 2) {
       const { statusCode, data } = await api.postRequest("/api/products", {
-        name, description, price, stock, image
+        name,
+        description,
+        price,
+        stock,
+        image,
       });
       if (statusCode === 400 || statusCode === 500 || statusCode === 403) {
         alert(data);

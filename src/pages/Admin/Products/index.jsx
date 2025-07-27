@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, removeProduct } from "@actions/productActions";
-import useLogin from "@utils/hooks/useLogin";
 import "./Products.css";
 
 function Products() {
@@ -10,79 +9,81 @@ function Products() {
   const history = useHistory();
   const getProducts = useSelector((state) => state.products);
   const { products, loading, error } = getProducts;
-  const { info } = useLogin();
+
+  const user = useSelector((state) => state.user);
+  if (user.details.type !== "admin") {
+    history.replace("/");
+  }
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  if (info.loading) return <h1>Cargando...</h1>;
-  else if (!info.loading && info.logged)
-    return (
-      <>
-        <div className="products-page">
-          <div className="content">
-            <div className="header">
-              <h2>Lista de productos ({getProductCount()})</h2>
-              <button onClick={() => history.push("/products/new")}>
-                Añadir producto
-              </button>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Imagen</th>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Precio</th>
-                  <th>Cantidad</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.length ? (
-                  products.map((product) => (
-                    <tr key={product.id}>
-                      <td>{product.id}</td>
-                      <td>
-                        <img src={product.image} alt={product.name} />
-                      </td>
-                      <td>{product.name}</td>
-                      <td>{product.description}</td>
-                      <td>{product.price}</td>
-                      <td>{product.stock}</td>
-                      <td>
-                        <div className="buttons">
-                          <button
-                            className="edit"
-                            onClick={async () => {
-                              history.push(`/products/${product.id}/edit`);
-                            }}
-                          >
-                            <i className="fas fa-pen"></i>
-                          </button>
-                          <button
-                            className="delete"
-                            onClick={() => dispatch(removeProduct(product.id))}
-                          >
-                            <i className="fas fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="7">No hay productos registrados</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+  return (
+    <>
+      <div className="products-page">
+        <div className="content">
+          <div className="header">
+            <h2>Administrar  productos ({getProductCount()})</h2>
+            <button onClick={() => history.push("/products/new")}>
+              Añadir producto
+            </button>
           </div>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.length ? (
+                products.map((product) => (
+                  <tr key={product.id}>
+                    <td>{product.id}</td>
+                    <td>
+                      <img src={product.image} alt={product.name} />
+                    </td>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                    <td>{product.stock}</td>
+                    <td>
+                      <div className="buttons">
+                        <button
+                          className="edit"
+                          onClick={async () => {
+                            history.push(`/products/${product.id}/edit`);
+                          }}
+                        >
+                          <i className="fas fa-pen"></i>
+                        </button>
+                        <button
+                          className="delete"
+                          onClick={() => dispatch(removeProduct(product.id))}
+                        >
+                          <i className="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="7">No hay productos registrados</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 
   function getProductCount() {
     return products.reduce(

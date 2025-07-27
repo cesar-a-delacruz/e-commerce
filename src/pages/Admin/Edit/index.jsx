@@ -11,6 +11,11 @@ function Edit({ match }) {
   const getProduct = useSelector((state) => state.product);
   const { loading, error, product } = getProduct;
 
+  const user = useSelector((state) => state.user);
+  if (user.details.type !== "admin") {
+    history.replace("/");
+  }
+
   useEffect(() => {
     if (getProduct && match.params.id !== getProduct.id) {
       dispatch(fetchProduct(match.params.id));

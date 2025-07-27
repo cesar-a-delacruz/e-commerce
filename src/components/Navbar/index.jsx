@@ -16,20 +16,26 @@ function Navbar() {
       <div className="logo">
         <h2>C SHOP</h2>
       </div>
-
       <ul className="links">
-        <li>
-          <Link to="/cart" className="cart">
-            <i className="fas fa-shopping-cart"></i>
-            <span>
-              Carrito <span className="badge">{cartSize()}</span>
-            </span>
-          </Link>
-        </li>
-
+        
         <li>
           <Link to="/">Productos</Link>
         </li>
+        {user.details.type === "customer" && (
+          <li>
+            <Link to="/cart" className="cart">
+              <i className="fas fa-shopping-cart"></i>
+              <span>
+                Carrito <span className="badge">{cartSize()}</span>
+              </span>
+            </Link>
+          </li>
+        )}
+        {user.details.type === "admin" && (
+          <li>
+            <Link to="/products">Administrar</Link>
+          </li>
+        )}
 
         {!user.logged ? (
           <li>
