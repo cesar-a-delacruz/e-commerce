@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, removeProduct } from "@actions/productActions";
+import useLogin from "@utils/hooks/useLogin";
 import "./Products.css";
 
 function Products() {
@@ -9,13 +10,14 @@ function Products() {
   const history = useHistory();
   const getProducts = useSelector((state) => state.products);
   const { products, loading, error } = getProducts;
+  const { info } = useLogin();
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  if (loading) return <h1>Cargando...</h1>;
-  else
+  if (info.loading) return <h1>Cargando...</h1>;
+  else if (!info.loading && info.logged)
     return (
       <>
         <div className="products-page">
@@ -54,7 +56,9 @@ function Products() {
                         <div className="buttons">
                           <button
                             className="edit"
-                            onClick={() => history.push("/products/edit")}
+                            onClick={async () => {
+                              history.push(`/products/${product.id}/edit`);
+                            }}
                           >
                             <i className="fas fa-pen"></i>
                           </button>

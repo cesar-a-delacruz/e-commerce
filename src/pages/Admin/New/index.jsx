@@ -28,7 +28,6 @@ function New() {
             type="text"
             id="name"
             name="name"
-            placeholder="John Smith"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />

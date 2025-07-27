@@ -30,6 +30,7 @@ export const productReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case actionTypes.GET_ONE:
       return {
+        ...state,
         loading: true,
       };
     case actionTypes.GET_ONE_SUCCESS:

@@ -10,6 +10,7 @@ import SignUp from "@pages/SignUp";
 import SignIn from "@pages/SignIn";
 import Products from "@pages/Admin/Products";
 import New from "@pages/Admin/New";
+import Edit from "@pages/Admin/Edit";
 import Home from "@pages/Customer/Home";
 import Product from "@pages/Customer/Product";
 import Cart from "@pages/Customer/Cart";
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/new" component={New} />
+          <Route exact path="/products/:id/edit" component={Edit} />
         </Switch>
       </main>
     </BrowserRouter>
