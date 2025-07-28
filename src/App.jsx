@@ -14,6 +14,7 @@ import Edit from "@pages/Admin/Edit";
 import Home from "@pages/Customer/Home";
 import Product from "@pages/Customer/Product";
 import Cart from "@pages/Customer/Cart";
+import Profile from "@pages/Customer/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/new" component={New} />
           <Route exact path="/products/:id/edit" component={Edit} />
+          <Route exact path="/profile" component={Profile} />
         </Switch>
       </main>
     </BrowserRouter>

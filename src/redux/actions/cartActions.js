@@ -15,7 +15,6 @@ export const fetchCart = () => async (dispatch) => {
         user_id: user.id,
       });
       const items = JSON.parse(data);
-      console.log(items)
       dispatch({
         type: actionTypes.FETCH,
         payload: {

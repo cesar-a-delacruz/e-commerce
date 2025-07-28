@@ -17,19 +17,28 @@ function Navbar() {
         <h2>C SHOP</h2>
       </div>
       <ul className="links">
-        
         <li>
           <Link to="/">Productos</Link>
         </li>
         {user.details.type === "customer" && (
-          <li>
-            <Link to="/cart" className="cart">
-              <i className="fas fa-shopping-cart"></i>
-              <span>
-                Carrito <span className="badge">{cartSize()}</span>
-              </span>
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link to="/cart" className="cart">
+                <i className="fas fa-shopping-cart"></i>
+                <span>
+                  Carrito <span className="badge">{cartSize()}</span>
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/profile" className="cart">
+                <i className="fas fa-user"></i>
+                <span>
+                  Perfil
+                </span>
+              </Link>
+            </li>
+          </>
         )}
         {user.details.type === "admin" && (
           <li>
