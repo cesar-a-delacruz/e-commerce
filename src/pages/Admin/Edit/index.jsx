@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "@actions/productActions";
 import * as api from "@utils/api";
+import { getUser } from "@utils/localstorage";
 import "./Edit.css";
 
 function Edit({ match }) {
@@ -11,8 +12,8 @@ function Edit({ match }) {
   const getProduct = useSelector((state) => state.product);
   const { loading, error, product } = getProduct;
 
-  const user = useSelector((state) => state.user);
-  if (user.details.type !== "admin") {
+  const user = getUser();
+  if (user.type !== "admin") {
     history.replace("/");
   }
 
@@ -89,14 +90,16 @@ function Edit({ match }) {
     );
 
   async function submitHandler() {
-    const { statusCode, data } = await api.putRequest("/api/products", {
-      id: product.id,
-      name: document.getElementById("name").value,
-      description: document.getElementById("description").value,
-      price: document.getElementById("price").value,
-      stock: document.getElementById("stock").value,
-      image: document.getElementById("image").value,
-    });
+    const { statusCode, data } = await api.putRequest(
+      `/api/products/${product.id}`,
+      {
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        price: document.getElementById("price").value,
+        stock: document.getElementById("stock").value,
+        image: document.getElementById("image").value,
+      }
+    );
     if (statusCode === 400 || statusCode === 500 || statusCode === 403) {
       alert(data);
       return;

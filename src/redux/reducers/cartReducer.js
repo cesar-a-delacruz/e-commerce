@@ -17,7 +17,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.ALTER_COUNT:
       const selectedItem = action.payload;
       const existingItem = state.items.find((i) => i.id === selectedItem.id);
-
+      console.log(selectedItem, existingItem)
       return {
         ...state,
         items: state.items.map((i) => {
@@ -30,7 +30,7 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
     case actionTypes.REMOVE:
       return {
         ...state,
-        cartItems: state.items.filter((i) => i.product !== action.payload),
+        items: state.items.filter((i) => i.id !== action.payload),
       };
 
     default:

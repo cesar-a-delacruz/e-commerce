@@ -13,7 +13,7 @@ function CartItem({ item, countHandler, removeHandler }) {
       <p className="price">${item.price}</p>
       <select
         value={item.count}
-        onChange={(e) => countHandler(item.id, e.target.value)}
+        onChange={(e) => countHandler(Number(item.id), Number(e.target.value))}
         className="select"
       >
         {[...Array(Number(item.stock)).keys()].map((x) => (
@@ -22,7 +22,7 @@ function CartItem({ item, countHandler, removeHandler }) {
           </option>
         ))}
       </select>
-      <button className="delete" onClick={() => removeHandler(item.id)}>
+      <button className="delete" onClick={() => removeHandler(Number(item.id))}>
         <i className="fas fa-trash"></i>
       </button>
     </div>

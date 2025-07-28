@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { countEdit, fetchCart, removeItem } from "@actions/cartActions";
+import { getUser } from "@utils/localstorage";
 import CartItem from "@components/CartItem";
 import "./Cart.css";
 
@@ -9,46 +10,44 @@ function Cart() {
   const history = useHistory();
   const cart = useSelector((state) => state.cart);
 
-  const user = useSelector((state) => state.user);
-  if (user.details.type !== "customer") {
-    history.replace("/");
+  const user = getUser();
+  if (user.type !== "customer") {
+    history.replace("/products");
   }
 
   return (
-    <>
-      <div className="cart-page">
-        <div className="left">
-          <h2>Carrito</h2>
+    <div className="cart-page">
+      <div className="left">
+        <h2>Carrito</h2>
 
-          {!cart.items.length ? (
-            <div>
-              Tu carrito esta vacío <Link to="/">Regresar</Link>
-            </div>
-          ) : (
-            cart.items.map((item) => (
-              <CartItem
-                key={item.product}
-                item={item}
-                countHandler={countHandler}
-                removeHandler={removeHandler}
-              />
-            ))
-          )}
-        </div>
-
-        <div className="right">
-          <div className="info">
-            <p>Subtotal ({getCartCount()}) productos</p>
-            <p>${getCartSubtotal()}</p>
-          </div>
+        {!cart.items.length ? (
           <div>
-            <button onClick={buyHandler}>Realizar compra</button>
+            Tu carrito esta vacío <Link to="/">Regresar</Link>
           </div>
+        ) : (
+          cart.items.map((item) => (
+            <CartItem
+              key={item.product}
+              item={item}
+              countHandler={countHandler}
+              removeHandler={removeHandler}
+            />
+          ))
+        )}
+      </div>
+
+      <div className="right">
+        <div className="info">
+          <p>Subtotal ({getCartCount()}) productos</p>
+          <p>${getCartSubtotal()}</p>
+        </div>
+        <div>
+          <button onClick={buyHandler}>Realizar compra</button>
         </div>
       </div>
-    </>
+    </div>
   );
-  return null;
+
   function countHandler(id, count) {
     dispatch(countEdit(id, count));
     dispatch(fetchCart());

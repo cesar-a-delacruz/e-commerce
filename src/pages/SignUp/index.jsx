@@ -65,7 +65,7 @@ function SignUp() {
   async function submitHandler() {
     if (name.length > 2 && email.length > 2 && password.length > 2) {
       setLoading(true);
-      const { statusCode, data } = await api.postRequest("/api/user/signup", {
+      const { statusCode, data } = await api.postRequest("/api/user/", {
         email,
         name,
         password,

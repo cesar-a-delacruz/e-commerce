@@ -11,10 +11,11 @@ export const fetchCart = () => async (dispatch) => {
   try {
     const user = getUser();
     if (user) {
-      const { data } = await api.postRequest(`/api/cart/items`, {
+      const { data } = await api.postRequest(`/api/cart/`, {
         user_id: user.id,
       });
       const items = JSON.parse(data);
+      console.log(items)
       dispatch({
         type: actionTypes.FETCH,
         payload: {
@@ -32,7 +33,7 @@ export const addToCart = (product_id, count) => async (dispatch) => {
   const { data } = await api.getRequest(`/api/products/${product_id}`);
   const product = JSON.parse(data);
   const insert_id = (
-    await api.postRequest("/api/cart", {
+    await api.postRequest("/api/cart/add", {
       user_id: getUser().id,
       product_id,
       count,
@@ -59,14 +60,14 @@ export const countEdit = (id, count) => async (dispatch) => {
     payload: { id, count },
   });
 
-  await api.putRequest("/api/cart", { id, count });
+  await api.putRequest(`/api/cart/${id}`, { count });
 };
 
-export const removeItem = (id) => (dispatch) => {
+export const removeItem = (id) => async (dispatch) => {
   dispatch({
     type: actionTypes.REMOVE,
     payload: id,
   });
 
-  api.deleteRequest("/api/cart/" + id);
+  await api.deleteRequest(`/api/cart/${id}`);
 };

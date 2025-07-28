@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import * as api from "@utils/api";
+import { getUser } from "@utils/localstorage";
 import "./New.css";
 
 function New() {
@@ -12,8 +12,8 @@ function New() {
   const [stock, setStock] = useState(0);
   const [image, setImage] = useState("");
 
-  const user = useSelector((state) => state.user);
-  if (user.details.type !== "admin") {
+  const user = getUser();
+  if (user.type !== "admin") {
     history.replace("/");
   }
 

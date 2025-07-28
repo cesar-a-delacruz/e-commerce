@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts, removeProduct } from "@actions/productActions";
+import { getUser } from "@utils/localstorage";
 import "./Products.css";
 
 function Products() {
@@ -10,8 +11,8 @@ function Products() {
   const getProducts = useSelector((state) => state.products);
   const { products, loading, error } = getProducts;
 
-  const user = useSelector((state) => state.user);
-  if (user.details.type !== "admin") {
+  const user = getUser();
+  if (user.type !== "admin") {
     history.replace("/");
   }
 
@@ -24,7 +25,7 @@ function Products() {
       <div className="products-page">
         <div className="content">
           <div className="header">
-            <h2>Administrar  productos ({getProductCount()})</h2>
+            <h2>Administrar productos ({getProductCount()})</h2>
             <button onClick={() => history.push("/products/new")}>
               Añadir producto
             </button>
