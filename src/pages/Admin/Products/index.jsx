@@ -25,7 +25,7 @@ function Products() {
       <div className="products-page">
         <div className="content">
           <div className="header">
-            <h2>Administrar productos ({getProductCount()})</h2>
+            <h2>Administrar productos ({getProductStock()})</h2>
             <button onClick={() => history.push("/products/new")}>
               Añadir producto
             </button>
@@ -86,7 +86,7 @@ function Products() {
     </>
   );
 
-  function getProductCount() {
+  function getProductStock() {
     return products.reduce(
       (stock, product) => Number(product.stock) + stock,
       0

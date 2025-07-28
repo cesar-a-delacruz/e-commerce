@@ -14,15 +14,14 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         items: [...state.items, item],
       };
-    case actionTypes.ALTER_COUNT:
+    case actionTypes.ALTER_AMOUNT:
       const selectedItem = action.payload;
       const existingItem = state.items.find((i) => i.id === selectedItem.id);
-      console.log(selectedItem, existingItem)
       return {
         ...state,
         items: state.items.map((i) => {
           if (i.id === existingItem.id) {
-            i.count = existingItem.count;
+            i.amount = existingItem.amount;
             return i;
           } else return i;
         }),

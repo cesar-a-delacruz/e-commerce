@@ -6,6 +6,6 @@ export function parseCart(cart) {
     image: item.image,
     price: item.price,
     stock: item.stock,
-    count: item.count,
+    amount: item.amount ,
   }));
 }

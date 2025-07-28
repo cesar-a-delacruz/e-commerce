@@ -28,17 +28,16 @@ export const fetchCart = () => async (dispatch) => {
   }
 };
 
-export const addToCart = (product_id, count) => async (dispatch) => {
+export const addToCart = (product_id, amount) => async (dispatch) => {
   const { data } = await api.getRequest(`/api/products/${product_id}`);
   const product = JSON.parse(data);
   const insert_id = (
     await api.postRequest("/api/cart/add", {
       user_id: getUser().id,
       product_id,
-      count,
+      amount,
     })
   ).data;
-
   dispatch({
     type: actionTypes.ADD,
     payload: {
@@ -48,18 +47,18 @@ export const addToCart = (product_id, count) => async (dispatch) => {
       price: product.price,
       stock: product.stock,
       id: insert_id,
-      count,
+      amount,
     },
   });
 };
 
-export const countEdit = (id, count) => async (dispatch) => {
+export const amountEdit = (id, amount) => async (dispatch) => {
   dispatch({
-    type: actionTypes.ALTER_COUNT,
-    payload: { id, count },
+    type: actionTypes.ALTER_AMOUNT,
+    payload: { id, amount },
   });
 
-  await api.putRequest(`/api/cart/${id}`, { count });
+  await api.putRequest(`/api/cart/${id}`, { amount });
 };
 
 export const removeItem = (id) => async (dispatch) => {

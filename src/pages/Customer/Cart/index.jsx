@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { countEdit, fetchCart, removeItem } from "@actions/cartActions";
+import { amountEdit, fetchCart, removeItem } from "@actions/cartActions";
 import { getUser } from "@utils/localstorage";
 import CartItem from "@components/CartItem";
 import "./Cart.css";
@@ -29,7 +29,7 @@ function Cart() {
             <CartItem
               key={item.product}
               item={item}
-              countHandler={countHandler}
+              amountHandler={amountHandler}
               removeHandler={removeHandler}
             />
           ))
@@ -38,7 +38,7 @@ function Cart() {
 
       <div className="right">
         <div className="info">
-          <p>Subtotal ({getCartCount()}) productos</p>
+          <p>Subtotal ({getCartAmount()}) productos</p>
           <p>${getCartSubtotal()}</p>
         </div>
         <div>
@@ -48,20 +48,20 @@ function Cart() {
     </div>
   );
 
-  function countHandler(id, count) {
-    dispatch(countEdit(id, count));
+  function amountHandler(id, amount) {
+    dispatch(amountEdit(id, amount));
     dispatch(fetchCart());
   }
   function removeHandler(id) {
     dispatch(removeItem(id));
     dispatch(fetchCart());
   }
-  function getCartCount() {
-    return cart.items.reduce((count, item) => Number(item.count) + count, 0);
+  function getCartAmount() {
+    return cart.items.reduce((amount, item) => Number(item.amount) + amount, 0);
   }
   function getCartSubtotal() {
     return cart.items
-      .reduce((price, item) => price + item.price * item.count, 0)
+      .reduce((price, item) => price + item.price * item.amount, 0)
       .toFixed(2);
   }
   function buyHandler() {

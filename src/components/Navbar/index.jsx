@@ -60,7 +60,7 @@ function Navbar() {
   );
 
   function cartSize() {
-    return cart.items.reduce((count, item) => Number(item.count) + count, 0);
+    return cart.items.reduce((amount, item) => Number(item.amount) + amount, 0);
   }
   function logoutHandler() {
     logout();

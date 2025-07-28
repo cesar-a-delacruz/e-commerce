@@ -5,7 +5,7 @@ import { addToCart } from "@actions/cartActions";
 import "./Product.css";
 
 function Product({ match, history }) {
-  const [count, setCount] = useState(1);
+  const [amount, setAmount] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const getProduct = useSelector((state) => state.product);
@@ -48,8 +48,8 @@ function Product({ match, history }) {
               <p>
                 Cantidad
                 <select
-                  value={count}
-                  onChange={(e) => setCount(e.target.value)}
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                 >
                   {[...Array(product.stock).keys()].map((x) => (
                     <option key={x + 1} value={x + 1}>
@@ -72,7 +72,7 @@ function Product({ match, history }) {
 
   function addToCartHandler() {
     if (user.logged) {
-      dispatch(addToCart(product.id, count));
+      dispatch(addToCart(product.id, amount));
       history.push(`/cart`);
       return;
     } else {

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./CartItem.css";
 
-function CartItem({ item, countHandler, removeHandler }) {
+function CartItem({ item, amountHandler, removeHandler }) {
   return (
     <div className="cart-item">
       <div className="image">
@@ -12,8 +12,8 @@ function CartItem({ item, countHandler, removeHandler }) {
       </Link>
       <p className="price">${item.price}</p>
       <select
-        value={item.count}
-        onChange={(e) => countHandler(Number(item.id), Number(e.target.value))}
+        value={item.amount}
+        onChange={(e) => amountHandler(Number(item.id), Number(e.target.value))}
         className="select"
       >
         {[...Array(Number(item.stock)).keys()].map((x) => (
