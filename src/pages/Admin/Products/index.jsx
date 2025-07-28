@@ -6,15 +6,15 @@ import { getUser } from "@utils/localstorage";
 import "./Products.css";
 
 function Products() {
-  const dispatch = useDispatch();
   const history = useHistory();
-  const getProducts = useSelector((state) => state.products);
-  const { products, loading, error } = getProducts;
-
   const user = getUser();
-  if (user.type !== "admin") {
+  if (!user || user.type !== "admin") {
     history.replace("/");
   }
+
+  const dispatch = useDispatch();
+  const getProducts = useSelector((state) => state.products);
+  const { products, loading, error } = getProducts;
 
   useEffect(() => {
     dispatch(fetchProducts());

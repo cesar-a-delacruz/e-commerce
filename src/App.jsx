@@ -8,11 +8,11 @@ import { setUser } from "@actions/userActions";
 import Navbar from "@components/Navbar";
 import SignUp from "@pages/SignUp";
 import SignIn from "@pages/SignIn";
+import Home from "@pages/Home";
+import Product from "@pages/Product";
 import Products from "@pages/Admin/Products";
 import New from "@pages/Admin/New";
 import Edit from "@pages/Admin/Edit";
-import Home from "@pages/Customer/Home";
-import Product from "@pages/Customer/Product";
 import Cart from "@pages/Customer/Cart";
 import Profile from "@pages/Customer/Profile";
 

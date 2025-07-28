@@ -8,13 +8,12 @@ import * as api from "@utils/api";
 import "./Profile.css";
 
 function Profile() {
-  const dispatch = useDispatch();
-  const user = getUser();
-  if (user.type !== "customer") {
-    history.replace("/products");
-  }
-
   const history = useHistory();
+  const user = getUser();
+  if (!user || user.type !== "customer") {
+    history.replace("/");
+  }
+  const dispatch = useDispatch();
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
 
@@ -87,7 +86,7 @@ function Profile() {
     }
     dispatch(initCart());
     dispatch(initUser());
-    logout()
+    logout();
     history.replace("/");
   }
 }

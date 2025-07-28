@@ -8,14 +8,14 @@ import "./Edit.css";
 
 function Edit({ match }) {
   const history = useHistory();
+  const user = getUser();
+  if (!user || user.type !== "admin") {
+    history.replace("/");
+  }
   const dispatch = useDispatch();
   const getProduct = useSelector((state) => state.product);
   const { loading, error, product } = getProduct;
 
-  const user = getUser();
-  if (user.type !== "admin") {
-    history.replace("/");
-  }
 
   useEffect(() => {
     if (getProduct && match.params.id !== getProduct.id) {

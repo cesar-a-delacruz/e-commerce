@@ -6,14 +6,13 @@ import CartItem from "@components/CartItem";
 import "./Cart.css";
 
 function Cart() {
-  const dispatch = useDispatch();
   const history = useHistory();
-  const cart = useSelector((state) => state.cart);
-
   const user = getUser();
-  if (user.type !== "customer") {
-    history.replace("/products");
+  if (!user || user.type !== "customer") {
+    history.replace("/");
   }
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   return (
     <div className="cart-page">

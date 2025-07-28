@@ -6,16 +6,15 @@ import "./New.css";
 
 function New() {
   const history = useHistory();
+  const user = getUser();
+  if (!user || user.type !== "admin") {
+    history.replace("/");
+  }
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
   const [image, setImage] = useState("");
-
-  const user = getUser();
-  if (user.type !== "admin") {
-    history.replace("/");
-  }
 
   return (
     <div className="new-product-page">
